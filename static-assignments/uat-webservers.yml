@@ -2,6 +2,6 @@
 - hosts: uat-webservers
   roles:
      - webserver
-- name: Disable enforce
-  become: true
-  command: setenforce 0
+  - name: Disable enforce
+    become: true
+    command: setenforce 0
