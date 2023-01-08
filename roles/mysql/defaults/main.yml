@@ -132,3 +132,6 @@ mysql_replication_master_inventory_host: "{{ mysql_replication_master }}"
 
 # Same keys as `mysql_users` above.
 mysql_replication_user: []
+
+db_is_required: false
+enable_mysql_db: false

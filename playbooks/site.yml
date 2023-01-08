@@ -5,8 +5,14 @@
   tags:
       - always
 
-# - name: Webserver assignment
-#   import_playbook: ../static-assignments/uat-webservers.yml
+- name: Database assignment
+- hosts: db
+  import_playbook: ../static-assignments/database.yml
+  when: db_is_required 
+
+- name: Webserver assignment
+- hosts: uat-webservers
+  import_playbook: ../static-assignments/uat-webservers.yml
 
 - name: Loadbalancers assignment  
   import_playbook: ../static-assignments/loadbalancers.yml
