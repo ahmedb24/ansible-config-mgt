@@ -6,7 +6,12 @@
   include: ../dynamic-assignments/env-vars.yml
   tags:
       - always
-      
+
+- name: Database assignment
+- hosts: db
+  import_playbook: ../static-assignments/database.yml
+  when: db_is_required 
+
 - name: Webserver assignment
 - hosts: uat-webservers
   import_playbook: ../static-assignments/uat-webservers.yml

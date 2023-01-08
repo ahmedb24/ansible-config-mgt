@@ -1,0 +1,4 @@
+---
+- hosts: db
+  roles:
+    - { role: mysql, when: enable_mysql_db and db_is_required }
