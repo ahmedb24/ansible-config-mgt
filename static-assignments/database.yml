@@ -1,4 +1,12 @@
 ---
 - hosts: db
+  tasks: 
+    - name: Debug line
+      ansible.builtin.debug: 
+        var: db_is_required
+    
+    - name: Debug line
+      ansible.builtin.debug: 
+        var: enable_mysql_db
   roles:
     - { role: mysql, when: enable_mysql_db and db_is_required }

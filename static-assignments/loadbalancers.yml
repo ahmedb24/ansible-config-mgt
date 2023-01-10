@@ -1,16 +1,4 @@
 - hosts: lb
-  tasks: 
-    - name: Debug line
-      ansible.builtin.debug: 
-        var: load_balancer_is_required
-    
-    - name: Debug line2
-      ansible.builtin.debug: 
-        var: enable_nginx_lb
-    
-    - name: Debug line3
-      ansible.builtin.debug: 
-        var: enable_apache_lb
   roles:
     - { role: nginx, when: enable_nginx_lb and load_balancer_is_required }
     - { role: apache, when: enable_apache_lb and load_balancer_is_required }
