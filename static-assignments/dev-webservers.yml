@@ -2,7 +2,7 @@
 - hosts: webservers
   roles:
     - webserver
-  tags: tooling
+  tags: tool
   gather_facts: no
 
 - hosts: todo_webservers
