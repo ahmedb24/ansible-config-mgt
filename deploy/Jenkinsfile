@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout SCM') {
+            steps {
+                git branch: 'roles-feature', url: 'https://github.com/ahmedb24/ansible-project'
+            }
+        }
+        
+        stage('Run ansible playbook') {
+            steps {
+                ansiblePlaybook credentialsId: 'universe', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev.yml', playbook: 'playbooks/site.yml'
+            }
+        }
+    }
+    
+    post {
+        // Clean after build
+        always {
+            cleanWs cleanWhenNotBuilt: true, 
+                    deleteDirs: true,  
+                    disableDeferredWipeout: false, 
+                    notFailBuild: true, 
+                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+                               [pattern: '.propsfile', type: 'INCLUDE']]  
+        }
+    }
+}

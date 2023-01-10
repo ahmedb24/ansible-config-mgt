@@ -5,5 +5,5 @@
 # 172.31.81.131 ansible_ssh_user='ubuntu' 
 # 172.31.30.36 ansible_ssh_user='ubuntu' 
 
-[lb]
-172.31.85.187 ansible_ssh_user='ubuntu'
+# [lb]
+# 172.31.85.187 ansible_ssh_user='ubuntu'
