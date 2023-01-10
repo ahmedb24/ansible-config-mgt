@@ -20,6 +20,7 @@
     and (mysql_install_packages | bool or mysql_user_password_update)
 
 - name: Disallow root login remotely
+  become: true
   command: 'mysql -NBe "{{ item }}"'
   with_items:
     - DELETE FROM mysql.user WHERE User='{{ mysql_root_username }}' AND Host NOT IN ('localhost', '127.0.0.1', '::1')
@@ -70,12 +71,14 @@
   when: mysql_install_packages | bool or mysql_root_password_update
 
 - name: Get list of hosts for the anonymous user.
+  become: true
   command: mysql -NBe "SELECT Host FROM mysql.user WHERE User = ''"
   register: mysql_anonymous_hosts
   changed_when: false
   check_mode: false
 
 - name: Remove anonymous MySQL users.
+  become: true
   mysql_user:
     name: ""
     host: "{{ item }}"
@@ -83,4 +86,5 @@
   with_items: "{{ mysql_anonymous_hosts.stdout_lines|default([]) }}"
 
 - name: Remove MySQL test database.
+  become: true
   mysql_db: "name='test' state=absent"
