@@ -17,11 +17,13 @@
     repo: https://github.com/ahmedb24/tooling
     dest: /var/www/html
     force: yes
+  tags: tooling
 
 - name: copy html content to one level up
   become: true
   command: cp -r /var/www/html/html/ /var/www/
-
+  tags: tooling
+  
 - name: Start service httpd, if not started
   become: true
   ansible.builtin.service:
