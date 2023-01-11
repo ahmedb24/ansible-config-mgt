@@ -23,7 +23,15 @@
   become: true
   command: cp -r /var/www/html/html/ /var/www/
   tags: tooling
-  
+
+- name: clone a todo repo
+  become: true
+  ansible.builtin.git:
+    repo: https://github.com/ahmedb24/php-todo
+    dest: /var/www/html
+    force: yes
+  tags: todo
+
 - name: Start service httpd, if not started
   become: true
   ansible.builtin.service:
