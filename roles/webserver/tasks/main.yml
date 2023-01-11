@@ -11,7 +11,7 @@
     name: "git"
     state: present
 
-- name: clone a repo
+- name: clone tooling repo
   become: true
   ansible.builtin.git:
     repo: https://github.com/ahmedb24/tooling
@@ -24,7 +24,7 @@
   command: cp -r /var/www/html/html/ /var/www/
   tags: tooling
 
-- name: clone a todo repo
+- name: clone todo repo
   become: true
   ansible.builtin.git:
     repo: https://github.com/ahmedb24/php-todo
