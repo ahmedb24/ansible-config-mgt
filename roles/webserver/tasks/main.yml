@@ -35,7 +35,7 @@
 - name: copy html content to one level up
   become: true
   command: cp -r /var/www/html/html/ /var/www/
-  tags: tooling
+  tags: tooling 
 
 - name: install pexpect library
   become: true
