@@ -32,7 +32,7 @@
 
 - name: run the db initialize script
   become: true
-  expect:
+  ansible.builtin.expect:
     command: 'mysql -h 54.197.64.27 -u admin -p < /var/www/html/tooling-db.sql'
     responses:
       (?i)password: "admin"
