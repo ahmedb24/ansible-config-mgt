@@ -8,8 +8,11 @@
 - name: install apache
   become: true
   ansible.builtin.yum:
-    name: "httpd"
-    state: present
+    - name: "httpd"
+      state: present
+      
+    - name: "python3-pip"
+      state: present
 
 - name: install git
   become: true
