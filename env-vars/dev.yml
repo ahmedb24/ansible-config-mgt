@@ -1,4 +1,4 @@
-db_is_required: true
+db_is_required: false
 enable_mysql_db: true
 enable_nginx_lb: true 
 enable_apache_lb: false 

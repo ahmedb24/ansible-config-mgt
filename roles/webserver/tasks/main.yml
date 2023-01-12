@@ -50,6 +50,8 @@
     responses:
       Enter password: "admin"
   register: temp
+  tags: tooling
+
 
 - name: clone todo repo
   become: true
