@@ -2,7 +2,7 @@
 172.31.62.128 ansible_ssh_user='ec2-user'
 
 [todo_webservers:vars]
-ansible_python_interpreter=/usr/bin/python
+ansible_python_interpreter=/usr/bin/python3
 
 [todo_webservers]
 172.31.62.128 ansible_ssh_user='ec2-user'
