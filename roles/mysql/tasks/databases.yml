@@ -1,5 +1,5 @@
 ---
-- name: Ensure MySQL databases are present.
+- name: Ensure MySQL tooling databases are present.
   become: true
   mysql_db:
     name: "{{ item.name }}"
@@ -8,3 +8,15 @@
     state: "{{ item.state | default('present') }}"
     target: "{{ item.target | default(omit) }}"
   with_items: "{{ mysql_databases }}"
+  tags: tooling
+
+- name: Ensure MySQL todo databases are present.
+  become: true
+  mysql_db:
+    name: "{{ item.name }}"
+    collation: "{{ item.collation | default('utf8_general_ci') }}"
+    encoding: "{{ item.encoding | default('utf8') }}"
+    state: "{{ item.state | default('present') }}"
+    target: "{{ item.target | default(omit) }}"
+  with_items: "{{ mysql_todo_databases }}"
+  tags: todo
