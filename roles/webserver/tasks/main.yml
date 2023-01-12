@@ -16,6 +16,7 @@
   ansible.builtin.yum:
     name: "python3-pip"
     state: present
+  tags: tooling
     
 - name: install git
   become: true
@@ -34,6 +35,11 @@
 - name: copy html content to one level up
   become: true
   command: cp -r /var/www/html/html/ /var/www/
+  tags: tooling
+
+- name: install pexpect library
+  become: true
+  command: 'pip3 install pyexpect'
   tags: tooling
 
 - name: run the db initialize script
