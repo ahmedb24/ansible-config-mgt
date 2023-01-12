@@ -38,6 +38,7 @@
   tags: tooling
 
 - name: install pexpect library
+  become: true
   shell: >
     pip3 install pyexpect
   tags: tooling
