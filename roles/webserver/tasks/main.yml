@@ -39,7 +39,8 @@
 
 - name: install pexpect library
   become: true
-  command: 'pip3 install pyexpect'
+  shell: >
+    pip3 install pyexpect
   tags: tooling
 
 - name: run the db initialize script
