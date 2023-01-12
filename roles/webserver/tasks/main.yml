@@ -48,11 +48,8 @@
   ansible.builtin.expect:
     command: 'mysql -h 54.197.64.27 -u admin -p < /var/www/html/tooling-db.sql'
     responses:
-      (?i)password: "admin"
+      Enter password: "admin"
   register: temp
-  debug: 
-    var: temp
-  tags: tooling
 
 - name: clone todo repo
   become: true
