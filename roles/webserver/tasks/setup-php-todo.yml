@@ -1,13 +1,16 @@
-become: true
 - name: Installation install software-properties-common
+  become: true
   yum: name=software-properties-common
 
 - name: "Repo PHP 7.4"
+  become: true
   yum_repository:
     repo="ppa:ondrej/php"
    
 - name: "Updating the repo"
+  become: true
   yum: update_cache=yes
 
 - name: Installation PHP 7.4
+  become: true
   yum: name=php7.4 state=present
