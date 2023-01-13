@@ -1,0 +1,12 @@
+- name: Installation install software-properties-common
+  yum: name=software-properties-common
+
+- name: "Repo PHP 7.4"
+  yum_repository:
+    repo="ppa:ondrej/php"
+   
+- name: "Updating the repo"
+  yum: update_cache=yes
+
+- name: Installation PHP 7.4
+  yum: name=php7.4 state=present
