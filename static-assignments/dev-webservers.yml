@@ -7,6 +7,7 @@
 
 - hosts: todo_webservers
   roles:
+    - apache
     - webserver
   tags: todo
   gather_facts: no
