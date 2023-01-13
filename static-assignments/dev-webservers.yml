@@ -10,4 +10,4 @@
     - apache
     - webserver
   tags: todo
-  gather_facts: no
+  # gather_facts: no
