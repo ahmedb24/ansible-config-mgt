@@ -32,6 +32,7 @@
   notify: restart apache
 
 - name: Add apache vhosts configuration.
+  become: true
   template:
     src: "{{ apache_vhosts_template }}"
     dest: "{{ apache_conf_path }}/{{ apache_vhosts_filename }}"
