@@ -55,7 +55,6 @@
   tags: tooling
 
 - name: clone todo repo
-  become: true
   ansible.builtin.git:
     repo: https://github.com/ahmedb24/php-todo
     dest: /home/ec2-user/todo
