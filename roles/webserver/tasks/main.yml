@@ -57,7 +57,7 @@
   become: true
   ansible.builtin.git:
     repo: https://github.com/ahmedb24/php-todo
-    dest: /home/ec2-user
+    dest: /home/ec2-user/todo
     force: yes
   tags: todo
 
