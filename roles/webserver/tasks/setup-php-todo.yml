@@ -1,11 +1,11 @@
 - name: Installation for php7.4
   become: true
-  script: |
-    sh sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
-    sh sudo yum install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm
-    sh sudo yum module list php
-    sh sudo yum module enable php:remi-7.4 -y
-    sh sudo yum install -y php
+  shell: |
+    rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+    yum install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+    yum module list php
+    yum module enable php:remi-7.4 -y
+    yum install -y php
 
 # - name: Installation install software-properties-common
 #   become: true
