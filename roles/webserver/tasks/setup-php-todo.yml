@@ -1,3 +1,4 @@
+become: true
 - name: Installation install software-properties-common
   yum: name=software-properties-common
 
