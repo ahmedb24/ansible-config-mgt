@@ -15,6 +15,7 @@
   with_items: "{{ apache_vhosts_ssl }}"
 
 - name: Enable Apache mods.
+  become: true
   copy:
     dest: "{{ apache_server_root }}/conf.modules.d/99-ansible-{{ item }}.conf"
     content: |
