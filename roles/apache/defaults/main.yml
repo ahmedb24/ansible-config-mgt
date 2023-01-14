@@ -28,7 +28,7 @@ apache_global_vhost_settings: |
 apache_vhosts:
   # Additional properties:
   # 'serveradmin, serveralias, allow_override, options, extra_parameters'.
-  - servername: ""
+  - servername: "100.25.188.197"
     serveralias: "todo"
     documentroot: "/var/www/todo/public"
     # extra_parameters: |
