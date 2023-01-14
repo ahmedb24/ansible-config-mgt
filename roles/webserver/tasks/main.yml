@@ -68,6 +68,12 @@
     group: "ec2-user"
     state: directory
     recurse: yes
+  tags: todo 
+
+- name: move .env.example to .env
+  become: true
+  command: mv -r /home/ec2-user/todo/.env.example /home/ec2-user/todo/.env
+  tags: todo 
 
 # Setup/install PHP for TODO APP.
 - include_tasks: "setup-php-todo.yml"
