@@ -1,25 +1,34 @@
-# - name: setup/run TODO server
-#   shell: |
-#     cd /home/ec2-user/todo
-#     composer install
-#     php artisan key:generate
-- name: setup/run TODO server
+- name: clone todo repo
+  become: true
+  ansible.builtin.git:
+    repo: https://github.com/ahmedb24/php-todo
+    dest: /var/www/todo
+    force: yes
+
+- name: change ownership
+  become: true
+  file:
+    path: "/var/www/todo"
+    owner: "{{ ansible_effective_user_id }}"
+    group: "{{ ansible_effective_user_id }}"
+
+- name: set permissions for Laravel storage folder
+    file:
+        path: /var/www/todo/storage
+        state: directory
+        recurse: yes
+        mode: '0755'
+    become: yes
+
+- name: move .env.sample to .env
+  become: true
+  command: mv /var/www/todo/.env.sample /var/www/todo/.env
+
+# Setup/install PHP for TODO APP.
+# - include_tasks: "setup-php-for-todo.yml"
+
+- name: setup TODO server
   shell: |
     cd /var/www/todo
     composer install
     php artisan key:generate
-
-
-
-# - name: run TODO server
-#   become: true
-#   cron: >
-#     job="run-one php /home/ec2-user/todo/artisan schedule:run --port=8080 1>> /dev/null 2>&1"
-#     state=present
-#     user=ec2-user
-#     name="php artisan schedule:run"
-
-# - name: ensure app is running
-#   shell: ps aux | grep php
-#   register: app_status
-# - debug: msg={{app_status.stdout_lines}}-

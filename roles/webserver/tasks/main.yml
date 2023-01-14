@@ -5,113 +5,16 @@
     path: /var/www/html/
     state: absent
 
-- name: install apache
-  become: true
-  ansible.builtin.yum:
-    name: "httpd"
-    state: present
-  tags: tooling
-
-- name: install python3-pip
-  become: true
-  ansible.builtin.yum:
-    name: "python3-pip"
-    state: present
-  tags: tooling
-    
 - name: install git
   become: true
   ansible.builtin.yum:
     name: "git"
     state: present
 
-- name: clone tooling repo
-  become: true
-  ansible.builtin.git:
-    repo: https://github.com/ahmedb24/tooling
-    dest: /var/www/html
-    force: yes
+# SETUP TOOLING APP.
+- include_tasks: "setup-tooling.yml"
   tags: tooling
 
-- name: copy html content to one level up
-  become: true
-  command: cp -r /var/www/html/html/ /var/www/
-  tags: tooling 
-
-- name: install pexpect library
-  become: true
-  pip:
-    name: pexpect
-  tags: tooling
-
-- name: run the db initialize script
-  become: true
-  ansible.builtin.expect:
-    command: 'mysql -h 54.197.64.27 -u admin -p < /var/www/html/tooling-db.sql'
-    responses:
-      Enter password: "admin"
-  register: temp
-  tags: tooling
-
-# - name: clone todo repo
-#   ansible.builtin.git:
-#     repo: https://github.com/ahmedb24/php-todo
-#     dest: /home/ec2-user/todo
-#     force: yes
-#   tags: todo
-- name: clone todo repo
-  become: true
-  ansible.builtin.git:
-    repo: https://github.com/ahmedb24/php-todo
-    dest: /var/www/todo
-    force: yes
-  tags: todo
-
-# - name: change ownership
-#   file:
-#     path: "/home/ec2-user/todo" # this should be as same as `dest` above
-#     owner: "ec2-user"
-#     group: "ec2-user"
-#     state: directory
-#     recurse: yes
-#   tags: todo 
-- name: change ownership
-  become: true
-  file:
-    path: "/var/www/todo" # this should be as same as `dest` above
-    owner: "{{ ansible_effective_user_id }}"
-    group: "{{ ansible_effective_user_id }}"
-    state: directory
-    recurse: yes
-  tags: todo 
-
-# - name: move .env.sample to .env
-#   become: true
-#   command: mv /home/ec2-user/todo/.env.sample /home/ec2-user/todo/.env
-#   tags: todo 
-- name: move .env.sample to .env
-  become: true
-  command: mv /var/www/todo/.env.sample /var/www/todo/.env
-  tags: todo 
-
-# Setup/install PHP for TODO APP.
-- include_tasks: "setup-php-for-todo.yml"
-  tags: todo  
-
-# Setup/Run TODO APP.
+# SETUP TODO APP.
 - include_tasks: "setup-todo.yml"
-  tags: todo  
-
-- name: Start service httpd, if not started
-  become: true
-  ansible.builtin.service:
-    name: httpd
-    state: started
-  tags: tooling
-
-- name: recursively remove /var/www/html/html/ directory
-  become: true
-  ansible.builtin.file:
-    path: /var/www/html/html
-    state: absent
-  tags: tooling
+  tags: todo
