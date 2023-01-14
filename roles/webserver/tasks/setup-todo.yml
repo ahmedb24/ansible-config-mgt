@@ -11,6 +11,7 @@
     path: "/var/www/todo"
     owner: "{{ ansible_effective_user_id }}"
     group: "{{ ansible_effective_user_id }}"
+    recurse: true
 
 - name: set permissions for Laravel storage folder
   become: true
@@ -20,13 +21,13 @@
     recurse: true
     mode: '0757'
 
-- name: set permissions for Laravel bootstrap folder
-  become: true
-  file:
-    path: /var/www/todo/bootstrap
-    state: directory
-    recurse: true
-    mode: '0757'
+# - name: set permissions for Laravel bootstrap folder
+#   become: true
+#   file:
+#     path: /var/www/todo/bootstrap
+#     state: directory
+#     recurse: true
+#     mode: '0757'
 
 - name: move .env.sample to .env
   become: true
