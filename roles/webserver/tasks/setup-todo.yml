@@ -12,6 +12,6 @@
   poll: 0
 
 - name: ensure app is running
-  shell: ps aux | grep php artisan serve
+  shell: ps aux | grep php
   register: app_status
 - debug: msg={{app_status.stdout_lines}}-
