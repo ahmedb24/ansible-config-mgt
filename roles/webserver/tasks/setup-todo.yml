@@ -13,16 +13,19 @@
     group: "{{ ansible_effective_user_id }}"
 
 - name: set permissions for Laravel storage folder
-  become: yes
+  become: true
   file:
     path: /var/www/todo/storage
     state: directory
-    recurse: yes
+    recurse: true
     mode: '0755'
 
 - name: move .env.sample to .env
   become: true
   command: mv /var/www/todo/.env.sample /var/www/todo/.env
+
+# Setup/install PHP for TODO APP.
+- include_tasks: "setup-php-for-todo.yml"
 
 - name: setup TODO server
   shell: |
