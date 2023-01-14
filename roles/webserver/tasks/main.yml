@@ -76,7 +76,11 @@
   tags: todo 
 
 # Setup/install PHP for TODO APP.
-- include_tasks: "setup-php-todo.yml"
+- include_tasks: "setup-php-for-todo.yml"
+  tags: todo  
+
+# Setup/Run TODO APP.
+- include_tasks: "setup-todo.yml"
   tags: todo  
 
 - name: Start service httpd, if not started

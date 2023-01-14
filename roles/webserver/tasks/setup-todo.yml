@@ -1,0 +1,7 @@
+- name: setup/run TODO server
+  become: true
+  shell: |
+    cd /home/ec2-user/todo
+    composer install
+    php artisan key:generate
+    php artisan serve --port=8080
