@@ -60,6 +60,7 @@
 #     force: yes
 #   tags: todo
 - name: clone todo repo
+  become: true
   ansible.builtin.git:
     repo: https://github.com/ahmedb24/php-todo
     dest: /var/www/todo
