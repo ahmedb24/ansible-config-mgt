@@ -4,7 +4,6 @@
   ansible.builtin.file:
     path: /var/www/html/
     state: absent
-  tags: tooling
 
 - name: install apache
   become: true
