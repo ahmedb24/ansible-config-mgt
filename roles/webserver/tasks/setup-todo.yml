@@ -18,7 +18,7 @@
     path: /var/www/todo/storage
     state: directory
     recurse: true
-    mode: '0755'
+    mode: '0757'
 
 - name: move .env.sample to .env
   become: true
