@@ -16,28 +16,21 @@ apache_remove_default_vhost: false
 apache_global_vhost_settings: |
   DirectoryIndex index.php index.html
 
+# original apache_vhosts 
 # apache_vhosts:
 #   # Additional properties:
 #   # 'serveradmin, serveralias, allow_override, options, extra_parameters'.
 #   - servername: "local.dev"
 #     documentroot: "/var/www/html"
-#     extra_parameters: |
-#       ProxyPreserveHost On
-#       ProxyPass / http://localhost:8080/
-
 apache_vhosts:
   # Additional properties:
   # 'serveradmin, serveralias, allow_override, options, extra_parameters'.
   - servername: "100.25.188.197"
     serveralias: "todo"
     documentroot: "/var/www/todo/public"
-    # extra_parameters: |
-    #   ProxyPreserveHost On
-    #   ProxyPass / http://localhost:8080/
 
 apache_allow_override: "All"
-# apache_options: "-Indexes +FollowSymLinks"
-apache_options: ""
+apache_options: "-Indexes +FollowSymLinks"
 
 apache_vhosts_ssl: []
 # Additional properties:
