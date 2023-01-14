@@ -20,6 +20,14 @@
     recurse: true
     mode: '0757'
 
+- name: set permissions for Laravel bootstrap folder
+  become: true
+  file:
+    path: /var/www/todo/bootstrap
+    state: directory
+    recurse: true
+    mode: '0757'
+
 - name: move .env.sample to .env
   become: true
   command: mv /var/www/todo/.env.sample /var/www/todo/.env
