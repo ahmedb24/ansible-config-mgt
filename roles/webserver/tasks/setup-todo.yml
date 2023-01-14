@@ -7,7 +7,7 @@
 - name: run TODO server
   become: true
   cron: >
-    job="run-one php /var/www/laravel/artisan schedule:run 1>> /dev/null 2>&1"
+    job="run-one php /var/www/laravel/artisan schedule:run --port=8080 1>> /dev/null 2>&1"
     state=present
     user=ec2-user
     name="php artisan schedule:run"
