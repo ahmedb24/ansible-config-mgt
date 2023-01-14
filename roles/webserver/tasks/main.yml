@@ -72,7 +72,7 @@
 
 - name: move .env.sample to .env
   become: true
-  command: mv -r /home/ec2-user/todo/.env.sample /home/ec2-user/todo/.env
+  command: mv /home/ec2-user/todo/.env.sample /home/ec2-user/todo/.env
   tags: todo 
 
 # Setup/install PHP for TODO APP.
