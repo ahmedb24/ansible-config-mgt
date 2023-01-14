@@ -8,7 +8,7 @@
   cron: >
     job="run-one php /var/www/laravel/artisan schedule:run 1>> /dev/null 2>&1"
     state=present
-    # user=www-data
+    user=www-data
     name="php artisan schedule:run"
   # command: 
   #   chdir: 
