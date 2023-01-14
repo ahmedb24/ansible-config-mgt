@@ -76,6 +76,7 @@
 #     recurse: yes
 #   tags: todo 
 - name: change ownership
+  become: true
   file:
     path: "/var/www/todo" # this should be as same as `dest` above
     owner: "{{ ansible_effective_user_id }}"
