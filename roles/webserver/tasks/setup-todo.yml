@@ -5,11 +5,16 @@
     php artisan key:generate
 
 - name: run TODO server
-  command: 
-    chdir: 
-    cmd: php artisan serve --port=8080
-  async: 1000
-  poll: 0
+  cron: >
+    job="run-one php /var/www/laravel/artisan schedule:run 1>> /dev/null 2>&1"
+    state=present
+    # user=www-data
+    name="php artisan schedule:run"
+  # command: 
+  #   chdir: 
+  #   cmd: php artisan serve --port=8080
+  # async: 1000
+  # poll: 0
 
 - name: ensure app is running
   shell: ps aux | grep php
