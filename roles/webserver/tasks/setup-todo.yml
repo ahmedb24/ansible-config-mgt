@@ -13,13 +13,13 @@
     group: "{{ ansible_effective_user_id }}"
     recurse: true
 
-- name: set permissions for Laravel storage folder
-  become: true
-  file:
-    path: /var/www/todo/storage
-    state: directory
-    recurse: true
-    mode: '0757'
+# - name: set permissions for Laravel storage folder
+#   become: true
+#   file:
+#     path: /var/www/todo/storage
+#     state: directory
+#     recurse: true
+#     mode: '0757'
 
 # - name: set permissions for Laravel bootstrap folder
 #   become: true
