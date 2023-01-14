@@ -1,5 +1,4 @@
 - name: setup/run TODO server
-  become: true
   shell: |
     cd /home/ec2-user/todo
     composer install
