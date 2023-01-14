@@ -1,23 +1,25 @@
+# - name: setup/run TODO server
+#   shell: |
+#     cd /home/ec2-user/todo
+#     composer install
+#     php artisan key:generate
 - name: setup/run TODO server
   shell: |
-    cd /home/ec2-user/todo
+    cd /var/www/todo
     composer install
     php artisan key:generate
 
-- name: run TODO server
-  become: true
-  cron: >
-    job="run-one php /home/ec2-user/todo/artisan schedule:run --port=8080 1>> /dev/null 2>&1"
-    state=present
-    user=ec2-user
-    name="php artisan schedule:run"
-  # command: 
-  #   chdir: 
-  #   cmd: php artisan serve --port=8080
-  # async: 1000
-  # poll: 0
 
-- name: ensure app is running
-  shell: ps aux | grep php
-  register: app_status
-- debug: msg={{app_status.stdout_lines}}-
+
+# - name: run TODO server
+#   become: true
+#   cron: >
+#     job="run-one php /home/ec2-user/todo/artisan schedule:run --port=8080 1>> /dev/null 2>&1"
+#     state=present
+#     user=ec2-user
+#     name="php artisan schedule:run"
+
+# - name: ensure app is running
+#   shell: ps aux | grep php
+#   register: app_status
+# - debug: msg={{app_status.stdout_lines}}-
