@@ -10,7 +10,7 @@
 - name: download composer installer
   get_url:
     url: https://getcomposer.org/installer
-  dest: /tmp/composer
+    dest: /tmp/composer
 
 - name: install composer
   become: true
