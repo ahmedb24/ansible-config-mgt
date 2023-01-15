@@ -59,7 +59,7 @@
   ansible.posix.seboolean:
     name: "{{ item }}"
     state: true
-    persistent: true
+    persistent: false
   with_items: 
     - httpd_can_network_connect
     - httpd_can_network_connect_db
