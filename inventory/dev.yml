@@ -5,7 +5,7 @@
 ansible_python_interpreter=/usr/bin/python3
 
 [todo_webservers]
-172.31.62.128 ansible_ssh_user='ec2-user'
+172.31.81.131 ansible_ssh_user='ec2-user'
 
 [db]
 172.31.56.169 ansible_ssh_user='ubuntu' 
