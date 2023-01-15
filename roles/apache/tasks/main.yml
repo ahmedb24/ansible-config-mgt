@@ -46,13 +46,3 @@
     name: "{{ apache_service }}"
     state: "{{ apache_state }}"
     enabled: "{{ apache_enabled }}"
-
-- name: set seboolean flags on and keep it persistent across reboots
-  become: true
-  ansible.posix.seboolean:
-    name: "{{ item }}"
-    state: true
-    persistent: true
-  with_items: 
-    - httpd_can_network_connect
-    - httpd_can_network_connect_db
