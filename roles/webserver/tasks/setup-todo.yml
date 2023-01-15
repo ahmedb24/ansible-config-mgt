@@ -19,6 +19,14 @@
     group: "{{ ansible_effective_user_id }}"
     recurse: true
 
+- name: set permissions for Laravel storage folder
+    become: true
+    file:
+        path: /var/www/myapp/storage
+        state: directory
+        recurse: yes
+        mode: '0757'
+
 - name: move .env.sample to .env
   become: true
   command: mv /var/www/todo/.env.sample /var/www/todo/.env
