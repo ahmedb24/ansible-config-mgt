@@ -25,7 +25,7 @@ apache_global_vhost_settings: |
 apache_vhosts:
   # Additional properties:
   # 'serveradmin, serveralias, allow_override, options, extra_parameters'.
-  - servername: "100.25.188.197"
+  - servername: "{{ ansible_host }}"
     serveralias: "todo"
     documentroot: "/var/www/todo/public"
 
