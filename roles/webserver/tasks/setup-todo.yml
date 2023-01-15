@@ -1,9 +1,3 @@
-# - name:  add /var/www/html/ directory if not present
-#   become: true
-#   ansible.builtin.file:
-#     path: /var/www/html/
-#     state: directory
-
 # Setup/install PHP for TODO APP.
 - include_tasks: "setup-php-for-todo.yml"
 
@@ -31,13 +25,13 @@
   become: true
   ansible.builtin.git:
     repo: https://github.com/ahmedb24/php-todo
-    dest: /var/www/html
+    dest: /var/www/html/todo
     force: yes
 
 - name: change ownership
   become: true
   file:
-    path: "/var/www/html"
+    path: "/var/www/html/todo"
     owner: "{{ ansible_effective_user_id }}"
     group: "{{ ansible_effective_user_id }}"
     recurse: true
@@ -45,17 +39,26 @@
 - name: set permissions for Laravel storage folder
   become: true
   file:
-    path: /var/www/html/storage
+    path: /var/www/html/todo/storage
     state: directory
-    recurse: yes
+    recurse: true
     mode: '0757'
 
 - name: move .env.sample to .env
   become: true
-  command: mv /var/www/html/.env.sample /var/www/html/.env
+  command: mv /var/www/html/todo/.env.sample /var/www/html/todo/.env
 
 - name: setup TODO server
   shell: |
-    cd /var/www/html
+    cd /var/www/html/todo
     composer install
     php artisan key:generate
+
+- name: set seboolean flags on and keep it persistent across reboots
+  ansible.posix.seboolean:
+    name: "{{ item }}"
+    state: true
+    persistent: true
+  with_items: 
+    - httpd_can_network_connect
+    - httpd_can_network_connect_db

@@ -27,7 +27,7 @@ apache_vhosts:
   # 'serveradmin, serveralias, allow_override, options, extra_parameters'.
   - servername: "{{ ansible_host }}"
     serveralias: "todo"
-    documentroot: "/var/www/html/public"
+    documentroot: "/var/www/html/todo/public"
 
 apache_allow_override: "All"
 apache_options: "-Indexes +FollowSymLinks"
