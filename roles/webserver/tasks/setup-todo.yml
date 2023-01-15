@@ -1,3 +1,9 @@
+- name:  add /var/www/html/ directory if not present
+  become: true
+  ansible.builtin.file:
+    path: /var/www/html/
+    state: present
+
 - name: clone todo repo
   become: true
   ansible.builtin.git:
@@ -12,22 +18,6 @@
     owner: "{{ ansible_effective_user_id }}"
     group: "{{ ansible_effective_user_id }}"
     recurse: true
-
-# - name: set permissions for Laravel storage folder
-#   become: true
-#   file:
-#     path: /var/www/todo/storage
-#     state: directory
-#     recurse: true
-#     mode: '0757'
-
-# - name: set permissions for Laravel bootstrap folder
-#   become: true
-#   file:
-#     path: /var/www/todo/bootstrap
-#     state: directory
-#     recurse: true
-#     mode: '0757'
 
 - name: move .env.sample to .env
   become: true
