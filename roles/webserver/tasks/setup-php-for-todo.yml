@@ -1,4 +1,4 @@
-- name: Installation for php7.4
+- name: install php7.4
   become: true
   shell: |
     rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
@@ -6,3 +6,9 @@
     yum module list php
     yum module enable php:remi-7.4 -y
     yum install -y php
+
+- name: install php-mysql
+  become: true
+  yum:
+    name: "php-mysql"
+    state: present

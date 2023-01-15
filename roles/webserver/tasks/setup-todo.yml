@@ -1,8 +1,8 @@
-- name:  add /var/www/html/ directory if not present
-  become: true
-  ansible.builtin.file:
-    path: /var/www/html/
-    state: directory
+# - name:  add /var/www/html/ directory if not present
+#   become: true
+#   ansible.builtin.file:
+#     path: /var/www/html/
+#     state: directory
 
 # Setup/install PHP for TODO APP.
 - include_tasks: "setup-php-for-todo.yml"
@@ -31,13 +31,13 @@
   become: true
   ansible.builtin.git:
     repo: https://github.com/ahmedb24/php-todo
-    dest: /var/www/todo
+    dest: /var/www/html
     force: yes
 
 - name: change ownership
   become: true
   file:
-    path: "/var/www/todo"
+    path: "/var/www/html"
     owner: "{{ ansible_effective_user_id }}"
     group: "{{ ansible_effective_user_id }}"
     recurse: true
@@ -45,17 +45,17 @@
 - name: set permissions for Laravel storage folder
   become: true
   file:
-    path: /var/www/todo/storage
+    path: /var/www/html/storage
     state: directory
     recurse: yes
     mode: '0757'
 
 - name: move .env.sample to .env
   become: true
-  command: mv /var/www/todo/.env.sample /var/www/todo/.env
+  command: mv /var/www/html/.env.sample /var/www/html/.env
 
 - name: setup TODO server
   shell: |
-    cd /var/www/todo
+    cd /var/www/html
     composer install
     php artisan key:generate
