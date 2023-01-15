@@ -4,6 +4,29 @@
     path: /var/www/html/
     state: directory
 
+# Setup/install PHP for TODO APP.
+- include_tasks: "setup-php-for-todo.yml"
+
+- name: download composer installer
+  get_url:
+      url: https://getcomposer.org/installer
+  dest: /tmp/composer
+
+- name: install composer
+    become: true
+    shell: php /tmp/composer --install-dir=/usr/local/bin
+
+- name: rename composer executable
+  become: true
+  shell: mv /usr/local/bin/composer.phar /usr/local/bin/composer
+
+- name: set permissions for composer file
+  become: true
+  file:
+      path: /usr/local/bin/composer
+      mode: a+x
+      state: file
+
 - name: clone todo repo
   become: true
   ansible.builtin.git:
@@ -30,9 +53,6 @@
 - name: move .env.sample to .env
   become: true
   command: mv /var/www/todo/.env.sample /var/www/todo/.env
-
-# Setup/install PHP for TODO APP.
-- include_tasks: "setup-php-for-todo.yml"
 
 - name: setup TODO server
   shell: |
