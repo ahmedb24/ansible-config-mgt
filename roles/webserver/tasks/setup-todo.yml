@@ -13,8 +13,8 @@
   dest: /tmp/composer
 
 - name: install composer
-    become: true
-    shell: php /tmp/composer --install-dir=/usr/local/bin
+  become: true
+  shell: php /tmp/composer --install-dir=/usr/local/bin
 
 - name: rename composer executable
   become: true
@@ -23,9 +23,9 @@
 - name: set permissions for composer file
   become: true
   file:
-      path: /usr/local/bin/composer
-      mode: a+x
-      state: file
+    path: /usr/local/bin/composer
+    mode: a+x
+    state: file
 
 - name: clone todo repo
   become: true
