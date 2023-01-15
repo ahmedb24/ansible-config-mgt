@@ -55,6 +55,7 @@
     php artisan key:generate
 
 - name: set seboolean flags on and keep it persistent across reboots
+  become: true
   ansible.posix.seboolean:
     name: "{{ item }}"
     state: true
