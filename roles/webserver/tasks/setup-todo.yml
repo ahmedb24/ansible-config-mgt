@@ -2,7 +2,7 @@
   become: true
   ansible.builtin.file:
     path: /var/www/html/
-    state: present
+    state: directory
 
 - name: clone todo repo
   become: true
