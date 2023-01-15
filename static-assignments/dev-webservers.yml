@@ -7,6 +7,6 @@
 
 - hosts: todo_webservers
   roles:
-    - apache
     - webserver
+    - apache
   tags: todo
