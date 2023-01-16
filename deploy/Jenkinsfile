@@ -1,6 +1,15 @@
 pipeline {
     agent any
+
     stages {
+      stage('Initial cleanup') {
+          steps {
+              dir("${WORKSPACE}") {
+                  deleteDir()
+              }
+          }
+      }
+
       stage('Build') {
         steps {
           script {
@@ -14,6 +23,16 @@ pipeline {
           script {
             sh 'echo "Testing Stage"'
           }
+        }
+      }
+
+      stage('Run ansible playbook') {
+        steps {
+            ansiblePlaybook credentialsId: 'universe', 
+            disableHostKeyChecking: true, 
+            installation: 'ansible', 
+            inventory: 'inventory/dev.yml', 
+            playbook: 'playbooks/site.yml'
         }
       }
     }
