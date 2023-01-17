@@ -1,14 +1,18 @@
 pipeline {
     agent any
 
+    parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+    }
+
     stages {
-    //   stage('Initial cleanup') {
-    //     steps {
-    //         dir("${WORKSPACE}") {
-    //             deleteDir()
-    //         }
-    //     }
-    //   }
+      stage('Initial cleanup') {
+        steps {
+            dir("${WORKSPACE}") {
+                deleteDir()
+            }
+        }
+      }
 
       stage('Checkout SCM') {
         steps {
@@ -41,17 +45,5 @@ pipeline {
             playbook: 'playbooks/site.yml'
         }
       }
-    }
-
-    post {
-        // Clean after build
-        always {
-            cleanWs cleanWhenNotBuilt: true,
-                    deleteDirs: true,
-                    disableDeferredWipeout: false,
-                    notFailBuild: true,
-                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
-                               [pattern: '.propsfile', type: 'INCLUDE']]
-        }
     }
 }
