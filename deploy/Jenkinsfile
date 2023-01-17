@@ -12,7 +12,7 @@ pipeline {
 
       stage('Checkout SCM') {
         steps {
-            git branch: 'roles-feature', url: 'https://github.com/ahmedb24/ansible-project'
+            git branch: 'feature/jenkinspipeline-stages', url: 'https://github.com/ahmedb24/ansible-project'
         }
       }
 
