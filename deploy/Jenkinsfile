@@ -3,11 +3,17 @@ pipeline {
 
     stages {
       stage('Initial cleanup') {
-          steps {
-              dir("${WORKSPACE}") {
-                  deleteDir()
-              }
-          }
+        steps {
+            dir("${WORKSPACE}") {
+                deleteDir()
+            }
+        }
+      }
+
+      stage('Checkout SCM') {
+        steps {
+            git branch: 'roles-feature', url: 'https://github.com/ahmedb24/ansible-project'
+        }
       }
 
       stage('Build') {
