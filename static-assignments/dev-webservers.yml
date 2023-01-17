@@ -1,4 +1,12 @@
 ---
 - hosts: webservers
   roles:
-     - webserver
+    - webserver
+  tags: tooling
+  gather_facts: no
+
+- hosts: todo_webservers
+  roles:
+    - webserver
+    - apache
+  tags: todo
