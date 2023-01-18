@@ -1,8 +1,8 @@
 ---
-- name: Include dynamic variables
-  # ansible.builtin.include_tasks: ../dynamic-assignments/env-vars.yml
-  tags:
-      - always
+# - name: Include dynamic variables
+#   ansible.builtin.include_tasks: ../dynamic-assignments/env-vars.yml
+#   tags:
+#       - always
 
 # - name: Database assignment
 #   import_playbook: ../static-assignments/database.yml
