@@ -1,6 +1,6 @@
 ---
 - name: Include dynamic variables
-  ansible.builtin.include_tasks: ../dynamic-assignments/env-vars.yml
+  # ansible.builtin.include_tasks: ../dynamic-assignments/env-vars.yml
   tags:
       - always
 
