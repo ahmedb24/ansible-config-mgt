@@ -4,9 +4,9 @@
   tags:
       - always
 
-# - name: Database assignment
-#   import_playbook: ../static-assignments/database.yml
-#   when: db_is_required 
+- name: Database assignment
+  import_playbook: ../static-assignments/database.yml
+  when: db_is_required 
 
 # - name: Webserver assignment
 #   import_playbook: ../static-assignments/dev-webservers.yml
