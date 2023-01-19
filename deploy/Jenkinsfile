@@ -38,7 +38,7 @@ pipeline {
 
       stage('Run ansible playbook') {
         steps {
-            ansiblePlaybook credentialsId: 'universe', 
+            ansiblePlaybook credentialsId: 'private-key', 
             disableHostKeyChecking: true, 
             installation: 'ansible', 
             inventory: 'inventory/${inventory}.yml', 
