@@ -41,7 +41,7 @@ pipeline {
             ansiblePlaybook credentialsId: 'universe', 
             disableHostKeyChecking: true, 
             installation: 'ansible', 
-            inventory: '${inventory}', 
+            inventory: 'inventory/${inventory}.yml', 
             playbook: 'playbooks/site.yml'
         }
       }
