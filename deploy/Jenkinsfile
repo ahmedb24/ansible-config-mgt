@@ -41,6 +41,8 @@ pipeline {
         steps {
           sh 'echo ${WORKSPACE}' 
           sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'  
+          env ANSIBLE_CONFIG='/opt/ansible/non-docker-deployment/ansible.cfg'
+          sh 'echo ${ANSIBLE_CONFIG}' 
         }
       }
       
