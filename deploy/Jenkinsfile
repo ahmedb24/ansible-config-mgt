@@ -6,6 +6,10 @@ pipeline {
       string(name: 'skip_tags', defaultValue: 'tooling',  description: 'This is the list of apps to skip')
     }
 
+    environment {
+        ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
+    }
+
     stages {
       stage('Initial cleanup') {
         steps {
@@ -41,9 +45,6 @@ pipeline {
         steps {
           sh 'echo ${WORKSPACE}' 
           sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'  
-        }
-        environment {
-            ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
         }
       }
       
