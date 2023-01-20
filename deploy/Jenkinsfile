@@ -50,7 +50,7 @@ pipeline {
       
       stage('Run ansible playbook') {
         steps {
-            sh 'echo ${ANSIBLE_CONFIG}' 
+            sh 'echo Check==== ${ANSIBLE_CONFIG}' 
             ansiblePlaybook credentialsId: 'private-key', 
             disableHostKeyChecking: true, 
             installation: 'ansible', 
