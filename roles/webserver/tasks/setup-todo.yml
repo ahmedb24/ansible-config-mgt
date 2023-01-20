@@ -3,7 +3,7 @@
 
 - name: download artifact from artifactory
   get_url:
-    url: http://54.82.118.247:8082/artifactory/php-todo
+    url: http://54.82.118.247:8082/php-todo
     dest: /home/ec2-user
     url_username: admin
     url_password: Password.1
@@ -13,7 +13,6 @@
     src: /home/ec2-user/php-todo
     dest: /var/www/html/todo
     remote_src: yes
-    url_password: Password.1
     
 # - name: download composer installer
 #   get_url:
