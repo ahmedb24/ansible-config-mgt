@@ -3,6 +3,7 @@ pipeline {
 
     parameters {
       string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+      string(name: 'skip_tags', defaultValue: 'tooling',  description: 'This is the list of apps to skip')
     }
 
     stages {
@@ -36,13 +37,21 @@ pipeline {
         }
       }
 
+      stage('Prepare Ansible For Execution') {
+        steps {
+          sh 'echo ${WORKSPACE}' 
+          sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'  
+        }
+      }
+      
       stage('Run ansible playbook') {
         steps {
             ansiblePlaybook credentialsId: 'private-key', 
             disableHostKeyChecking: true, 
             installation: 'ansible', 
             inventory: 'inventory/${inventory}.yml', 
-            playbook: 'playbooks/site.yml'
+            playbook: 'playbooks/site.yml',
+            skippedTags: '${skip_tags}'
         }
       }
     }
