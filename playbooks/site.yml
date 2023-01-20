@@ -1,8 +1,6 @@
 ---
 - name: Include dynamic variables
   include: ../dynamic-assignments/env-vars.yml
-  tags:
-      - always
 
 - name: Database assignment
   import_playbook: ../static-assignments/database.yml

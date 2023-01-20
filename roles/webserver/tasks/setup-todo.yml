@@ -1,0 +1,69 @@
+# Setup/install PHP for TODO APP.
+- include_tasks: "setup-php-for-todo.yml"
+
+- name: download composer installer
+  get_url:
+    url: https://getcomposer.org/installer
+    dest: /tmp/composer
+
+- name: install composer
+  become: true
+  shell: php /tmp/composer --install-dir=/usr/local/bin
+
+- name: rename composer executable
+  become: true
+  shell: mv /usr/local/bin/composer.phar /usr/local/bin/composer
+
+- name: set permissions for composer file
+  become: true
+  file:
+    path: /usr/local/bin/composer
+    mode: a+x
+    state: file
+
+- name: clone todo repo
+  become: true
+  ansible.builtin.git:
+    repo: https://github.com/ahmedb24/php-todo
+    dest: /var/www/html/todo
+    force: yes
+
+- name: change ownership
+  become: true
+  file:
+    path: "/var/www/html/todo"
+    owner: "{{ ansible_effective_user_id }}"
+    group: "{{ ansible_effective_user_id }}"
+    recurse: true
+
+- name: set permissions for Laravel storage folder
+  become: true
+  file:
+    path: /var/www/html/todo/storage
+    state: directory
+    recurse: true
+    mode: '0757'
+
+- name: move .env.sample to .env
+  become: true
+  command: mv /var/www/html/todo/.env.sample /var/www/html/todo/.env
+
+- name: setup TODO server
+  shell: |
+    cd /var/www/html/todo
+    composer install
+    php artisan key:generate
+
+- name: set seboolean flags on and keep it persistent across reboots
+  become: true
+  ansible.posix.seboolean:
+    name: "{{ item }}"
+    state: true
+    persistent: false
+  with_items: 
+    - httpd_can_network_connect
+    - httpd_can_network_connect_db
+
+- name: disable selinux
+  become: true
+  command: setenforce 0

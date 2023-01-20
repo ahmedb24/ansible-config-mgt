@@ -112,6 +112,11 @@ mysql_databases:
 #     collation: utf8_general_ci
 #     encoding: utf8
 #     replicate: 1
+mysql_todo_databases: 
+  - name: homestead
+#     collation: utf8_general_ci
+#     encoding: utf8
+#     replicate: 1
 
 # Users.
 mysql_users: 
@@ -120,6 +125,12 @@ mysql_users:
     password: "admin"
     priv: "tooling.*:ALL"
   
+  - name: homestead
+    host: "%"
+    password: "sePret^i"
+    priv: "homestead.*:ALL"
+
+mysql_todo_users: 
   - name: homestead
     host: "%"
     password: "sePret^i"
