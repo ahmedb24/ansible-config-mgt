@@ -21,23 +21,7 @@ pipeline {
 
       stage('Checkout SCM') {
         steps {
-            git branch: 'feature/jenkinspipeline-stages', url: 'https://github.com/ahmedb24/ansible-project'
-        }
-      }
-
-      stage('Build') {
-        steps {
-          script {
-            sh 'echo "Building Stage"'
-          }
-        }
-      }
-
-      stage('Test') {
-        steps {
-          script {
-            sh 'echo "Testing Stage"'
-          }
+            git branch: 'main', url: 'https://github.com/ahmedb24/ansible-project'
         }
       }
 
