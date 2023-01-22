@@ -1,11 +1,54 @@
 pipeline {
     agent any
+
+    parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+      string(name: 'skip_tags', defaultValue: 'tooling',  description: 'This is the list of apps to skip')
+    }
+
+    environment {
+        ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
+    }
+
     stages {
+      stage('Initial cleanup') {
+        steps {
+            dir("${WORKSPACE}") {
+                deleteDir()
+            }
+        }
+      }
+
+      stage('Checkout SCM') {
+        steps {
+            git branch: 'feature/jenkinspipeline-stages', url: 'https://github.com/ahmedb24/ansible-project'
+        }
+      }
+
       stage('Build') {
         steps {
           script {
             sh 'echo "Building Stage"'
           }
+        }
+      }
+
+      stage('Test') {
+        steps {
+          script {
+            sh 'echo "Testing Stage"'
+          }
+        }
+      }
+
+      stage('Run ansible playbook') {
+        steps {
+            ansiblePlaybook credentialsId: 'private-key', 
+            disableHostKeyChecking: true, 
+            installation: 'ansible', 
+            inventory: 'inventory/${inventory}.yml', 
+            playbook: 'playbooks/site.yml',
+            skippedTags: '${skip_tags}'
         }
       }
     }

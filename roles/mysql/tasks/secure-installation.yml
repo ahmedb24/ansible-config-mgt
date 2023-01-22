@@ -27,6 +27,7 @@
   changed_when: false
 
 - name: Get list of hosts for the root user.
+  become: true
   command: mysql -NBe
     "SELECT Host
     FROM mysql.user

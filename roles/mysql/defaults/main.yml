@@ -108,6 +108,12 @@ mysql_config_include_files: []
 # Databases.
 mysql_databases: 
   - name: tooling
+  - name: homestead
+#     collation: utf8_general_ci
+#     encoding: utf8
+#     replicate: 1
+mysql_todo_databases: 
+  - name: homestead
 #     collation: utf8_general_ci
 #     encoding: utf8
 #     replicate: 1
@@ -118,6 +124,17 @@ mysql_users:
     host: "%"
     password: "admin"
     priv: "tooling.*:ALL"
+  
+  - name: homestead
+    host: "%"
+    password: "sePret^i"
+    priv: "homestead.*:ALL"
+
+mysql_todo_users: 
+  - name: homestead
+    host: "%"
+    password: "sePret^i"
+    priv: "homestead.*:ALL"
 
 mysql_disable_log_bin: false
 

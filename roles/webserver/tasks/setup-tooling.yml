@@ -1,0 +1,47 @@
+- name: install apache
+  become: true
+  ansible.builtin.yum:
+    name: "httpd"
+    state: present
+
+- name: install python3-pip
+  become: true
+  ansible.builtin.yum:
+    name: "python3-pip"
+    state: present
+    
+- name: clone tooling repo
+  become: true
+  ansible.builtin.git:
+    repo: https://github.com/ahmedb24/tooling
+    dest: /var/www/html
+    force: yes
+
+- name: copy html content to one level up
+  become: true
+  command: cp -r /var/www/html/html/ /var/www/
+
+- name: install pexpect library
+  become: true
+  pip:
+    name: pexpect
+
+- name: run the db initialize script
+  become: true
+  ansible.builtin.expect:
+    command: 'mysql -h 54.197.64.27 -u admin -p < /var/www/html/tooling-db.sql'
+    responses:
+      Enter password: "admin"
+  register: temp
+
+- name: Start service httpd, if not started
+  become: true
+  ansible.builtin.service:
+    name: httpd
+    state: started
+
+- name: recursively remove /var/www/html/html/ directory
+  become: true
+  ansible.builtin.file:
+    path: /var/www/html/html
+    state: absent
