@@ -6,8 +6,8 @@
   import_playbook: ../static-assignments/database.yml
   when: db_is_required 
 
-- name: Webserver assignment
-  import_playbook: ../static-assignments/dev-webservers.yml
+# - name: Webserver assignment
+#   import_playbook: ../static-assignments/dev-webservers.yml
 
 # - name: Loadbalancers assignment  
 #   import_playbook: ../static-assignments/loadbalancers.yml
